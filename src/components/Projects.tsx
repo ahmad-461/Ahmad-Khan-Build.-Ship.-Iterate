@@ -1,6 +1,7 @@
 "use client";
 
 import { ExternalLink, Briefcase, FileSearch, HeartPulse, Scale, Gamepad2 } from "lucide-react";
+import ScrollReveal from "./ScrollReveal";
 
 interface Project {
   name: string;
@@ -73,21 +74,24 @@ export default function Projects() {
   ];
 
   return (
-    <section id="projects" className="py-24 md:py-32 bg-[#0f172a] border-t border-[#334155]/40 relative overflow-hidden">
+    <section
+      id="projects"
+      className="py-24 md:py-32 bg-[#0f172a] border-t border-[#334155]/40 relative overflow-hidden"
+    >
       {/* Subtle Background Accent */}
       <div className="absolute top-1/3 right-10 w-[300px] h-[300px] bg-[#3b82f6]/5 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <ScrollReveal className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-20 space-y-3">
-          <span className="text-xs sm:text-sm font-semibold tracking-wider text-[#3b82f6] uppercase font-mono-accent">
+          <span className="text-xs sm:text-sm font-semibold tracking-wider text-[#3b82f6] uppercase font-mono">
             Selected Work
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#f8fafc]">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#f8fafc] tracking-tight">
             Featured Projects
           </h2>
-          <p className="text-sm sm:text-base text-[#f8fafc]/60 max-w-xl mx-auto">
+          <p className="text-sm sm:text-base text-[#f8fafc]/60 max-w-2xl mx-auto leading-relaxed">
             A collection of AI-powered tools and web applications built end-to-end
           </p>
         </div>
@@ -104,20 +108,20 @@ export default function Projects() {
                 className={`group flex flex-col justify-between bg-[#1e293b] border rounded-xl overflow-hidden transition-all duration-300 shadow-xl ${
                   isComingSoon
                     ? "border-[#334155]/40 opacity-70 shadow-black/10"
-                    : "border-[#334155]/60 hover:border-[#3b82f6]/40 hover:-translate-y-1 shadow-black/15 hover:shadow-[#3b82f6]/10 hover:shadow-lg"
+                    : "border-[#334155]/60 hover:border-[#3b82f6]/40 hover:scale-[1.02] hover:-translate-y-1 shadow-black/15 hover:shadow-[#3b82f6]/10 hover:shadow-lg"
                 }`}
               >
-                {/* Card Main Area */}
-                <div className="p-7 sm:p-9 relative flex-grow flex flex-col justify-between">
+                {/* Card Main Area - padding unified to p-6 sm:p-8 */}
+                <div className="p-6 sm:p-8 relative flex-grow flex flex-col justify-between">
                   <div>
                     {/* Header & Status Badge */}
                     <div className="flex justify-between items-start gap-4 mb-5">
-                      <span className="flex items-center gap-1.5 text-xs font-semibold tracking-wider text-[#3b82f6]/85 uppercase font-mono-accent">
+                      <span className="flex items-center gap-1.5 text-xs font-semibold tracking-wider text-[#3b82f6]/85 uppercase font-mono">
                         <IconComponent className="w-3.5 h-3.5 flex-shrink-0" />
                         <span>{project.category}</span>
                       </span>
                       <span
-                        className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold font-mono-accent border whitespace-nowrap ${
+                        className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold font-mono border whitespace-nowrap ${
                           project.statusBadge === "Live"
                             ? "bg-[#3b82f6] text-white border-transparent"
                             : project.statusBadge === "AI Powered"
@@ -140,8 +144,8 @@ export default function Projects() {
                       {project.name}
                     </h3>
 
-                    {/* Description */}
-                    <p className={`text-sm sm:text-base leading-relaxed mb-6 ${
+                    {/* Description - comfortable line width & max width constraint */}
+                    <p className={`text-sm sm:text-base leading-relaxed mb-6 max-w-2xl ${
                       isComingSoon ? "text-[#f8fafc]/45" : "text-[#f8fafc]/70"
                     }`}>
                       {project.description}
@@ -153,7 +157,7 @@ export default function Projects() {
                     {project.techTags.map((tag) => (
                       <span
                         key={tag}
-                        className={`text-xs font-medium px-2.5 py-1 rounded-md border font-mono-accent ${
+                        className={`text-xs font-medium px-2.5 py-1 rounded-md border font-mono ${
                           isComingSoon
                             ? "bg-[#0f172a]/20 border-[#334155]/20 text-[#f8fafc]/30"
                             : "bg-[#0f172a] border-[#334155]/40 text-[#f8fafc]/60"
@@ -166,7 +170,7 @@ export default function Projects() {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="px-7 py-5 sm:px-9 sm:py-6 bg-[#0f172a]/40 border-t border-[#334155]/50 flex items-center gap-4">
+                <div className="px-6 py-4 sm:px-8 sm:py-5 bg-[#0f172a]/40 border-t border-[#334155]/50 flex items-center gap-4">
                   {project.liveUrl === "#" ? (
                     <button
                       disabled
@@ -181,7 +185,7 @@ export default function Projects() {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#3b82f6] hover:bg-[#2563eb] text-white text-sm font-medium shadow-sm transition-all duration-200"
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#3b82f6] hover:bg-[#2563eb] text-white text-sm font-medium shadow-sm transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
                     >
                       <ExternalLink className="w-4 h-4" />
                       <span>Live Demo</span>
@@ -208,7 +212,7 @@ export default function Projects() {
                       href={project.sourceUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#1e293b] hover:bg-[#334155] border border-[#334155] text-[#f8fafc] text-sm font-medium transition-all duration-200"
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#1e293b] hover:bg-[#334155] border border-[#334155] text-[#f8fafc] text-sm font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
                     >
                       <svg
                         className="w-4 h-4 fill-current"
@@ -226,7 +230,7 @@ export default function Projects() {
           })}
         </div>
 
-      </div>
+      </ScrollReveal>
     </section>
   );
 }

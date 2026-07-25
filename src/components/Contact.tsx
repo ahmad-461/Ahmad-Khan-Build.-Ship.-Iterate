@@ -1,6 +1,7 @@
 "use client";
 
 import { Mail, Phone } from "lucide-react";
+import ScrollReveal from "./ScrollReveal";
 
 export default function Contact() {
   const contactLinks = [
@@ -47,21 +48,24 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-20 md:py-28 bg-[#0f172a] border-t border-[#334155]/40 relative overflow-hidden">
+    <section
+      id="contact"
+      className="py-24 md:py-32 bg-[#0f172a] border-t border-[#334155]/40 relative overflow-hidden"
+    >
       {/* Subtle Background Accent */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-[#3b82f6]/5 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <ScrollReveal className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-2">
-          <span className="text-xs sm:text-sm font-semibold tracking-wider text-[#3b82f6] uppercase font-mono-accent">
+          <span className="text-xs sm:text-sm font-semibold tracking-wider text-[#3b82f6] uppercase font-mono">
             Collaboration
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#f8fafc]">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#f8fafc] tracking-tight">
             Get In Touch
           </h2>
-          <p className="text-sm sm:text-base text-[#f8fafc]/60 max-w-xl mx-auto">
+          <p className="text-sm sm:text-base text-[#f8fafc]/60 max-w-2xl mx-auto leading-relaxed">
             Available for internships and collaborations. Feel free to reach out via any of the platforms below!
           </p>
         </div>
@@ -74,7 +78,7 @@ export default function Contact() {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group block p-6 rounded-xl bg-[#1e293b] border border-[#334155]/60 hover:border-[#3b82f6]/40 hover:bg-[#1e293b]/80 transition-all duration-300 shadow-xl shadow-black/10 text-left hover:shadow-[#3b82f6]/5"
+              className="group block p-6 sm:p-8 rounded-xl bg-[#1e293b] border border-[#334155]/60 hover:border-[#3b82f6]/40 hover:bg-[#1e293b]/80 transition-all duration-300 shadow-xl shadow-black/10 text-left hover:shadow-[#3b82f6]/5 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
             >
               <div className="flex justify-between items-start mb-6">
                 <div className="p-3 rounded-lg bg-[#0f172a] border border-[#334155]/60 group-hover:bg-[#3b82f6]/10 group-hover:border-[#3b82f6]/30 transition-all duration-300 flex items-center justify-center">
@@ -83,7 +87,7 @@ export default function Contact() {
               </div>
 
               <div>
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2 font-mono-accent">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2 font-mono">
                   {link.name}
                 </h3>
                 <p className="text-sm sm:text-base font-bold text-[#f8fafc] group-hover:text-[#3b82f6] transition-colors duration-200 break-all">
@@ -94,7 +98,7 @@ export default function Contact() {
           ))}
         </div>
 
-      </div>
+      </ScrollReveal>
     </section>
   );
 }

@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +20,17 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close menu on outside click
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (isOpen && menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, [isOpen]);
+
   const navLinks = [
     { name: "About", href: "#about" },
     { name: "Skills", href: "#skills" },
@@ -28,9 +40,10 @@ export default function Navbar() {
 
   return (
     <header
+      ref={menuRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-[#0f172a]/90 backdrop-blur-md border-b border-[#334155]/60 shadow-lg shadow-[#000000]/20"
+          ? "bg-[#0f172a]/95 backdrop-blur-md border-b border-[#334155]/60 shadow-lg shadow-[#000000]/20"
           : "bg-transparent border-b border-transparent"
       }`}
     >
@@ -40,7 +53,7 @@ export default function Navbar() {
           <div className="flex-shrink-0">
             <a
               href="#"
-              className="text-lg md:text-xl font-bold tracking-tight text-[#f8fafc] hover:text-[#3b82f6] transition-colors"
+              className="text-base sm:text-lg md:text-xl font-bold tracking-tight text-[#f8fafc] hover:text-[#3b82f6] transition-colors rounded-md p-1.5 focus-visible:ring-2 focus-visible:ring-blue-500"
             >
               Muhammad Ahmad Khan
             </a>
@@ -52,19 +65,19 @@ export default function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-[#f8fafc]/80 hover:text-[#3b82f6] transition-colors"
+                className="text-sm font-medium text-[#f8fafc]/80 hover:text-[#3b82f6] transition-colors rounded-md py-1.5 px-2.5 focus-visible:ring-2 focus-visible:ring-blue-500"
               >
                 {link.name}
               </a>
             ))}
           </nav>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - Polished tap target to 44x44px minimum */}
           <div className="flex md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
-              className="inline-flex items-center justify-center p-2 rounded-md text-[#f8fafc]/80 hover:text-[#3b82f6] hover:bg-[#1e293b] focus:outline-none transition-colors"
+              className="inline-flex items-center justify-center p-2.5 rounded-lg text-[#f8fafc]/80 hover:text-[#3b82f6] hover:bg-[#1e293b] focus-visible:ring-2 focus-visible:ring-blue-500 transition-colors"
               aria-controls="mobile-menu"
               aria-expanded={isOpen}
             >
@@ -75,22 +88,22 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Smooth transition, safe tap targets */}
       <div
         className={`md:hidden transition-all duration-300 ease-in-out ${
           isOpen
-            ? "max-h-64 opacity-100 border-b border-[#334155] bg-[#0f172a]"
+            ? "max-h-72 opacity-100 border-b border-[#334155]/60 bg-[#0f172a]"
             : "max-h-0 opacity-0 overflow-hidden pointer-events-none"
         }`}
         id="mobile-menu"
       >
-        <div className="px-2 pt-2 pb-4 space-y-1 sm:px-3">
+        <div className="px-4 pt-2 pb-5 space-y-1.5 sm:px-6">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
               onClick={() => setIsOpen(false)}
-              className="block px-3 py-2.5 rounded-md text-base font-medium text-[#f8fafc]/80 hover:text-[#3b82f6] hover:bg-[#1e293b] transition-colors"
+              className="block px-3 py-3 rounded-lg text-base font-medium text-[#f8fafc]/80 hover:text-[#3b82f6] hover:bg-[#1e293b] transition-colors focus-visible:ring-2 focus-visible:ring-blue-500"
             >
               {link.name}
             </a>
