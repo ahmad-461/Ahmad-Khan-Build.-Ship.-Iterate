@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Muhammad Ahmad Khan — Developer Portfolio
 
-## Getting Started
+A personal portfolio website showcasing full-stack and AI-powered web projects, built to support internship applications.
 
-First, run the development server:
+🔗 **Live Site:** [Add your Vercel URL here]
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🧑‍💻 About
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+I'm a Computer Science student at Nawaz Sharif University of Agriculture, Multan, building portfolio projects that combine clean UI, full-stack architecture, and AI integration. I work as product owner/decision-maker — directing AI coding agents (Jules by Google Labs) for implementation while handling architecture, prompt design, and design direction myself.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Featured Projects
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Project | Description | Live Demo |
+|---|---|---|
+| **Freelance Ops Toolkit** | Free, no-login web app with 15 tools for freelancers | [Visit](https://freelance-ops-toolkit.vercel.app/) |
+| **DocSim Checker** | Full-stack document similarity checker with hand-written TF-IDF engine and Gemini API integration | [Visit](https://docsim-checker.vercel.app/) |
+| **RxReader** | AI-powered prescription reader — explains medicines in plain English in 15 seconds | [Visit](https://medical-120-nu.vercel.app/) |
+| **Clario** | Untangles legalese and fine print into plain language with hidden-risk detection | [Visit](https://clario-one-delta.vercel.app/) |
+| **Reflex Lab** | Browser-based reaction time & typing speed mini-games (in development) | Coming Soon |
 
-## Learn More
+## 🛠️ Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Framework:** Next.js 15 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS v3 (hex/RGB only, no oklch/lab)
+- **Icons:** lucide-react
+- **Deployment:** Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
