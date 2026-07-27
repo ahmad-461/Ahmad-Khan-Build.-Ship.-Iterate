@@ -8,9 +8,20 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen pt-28 pb-20 md:pt-36 md:pb-28 flex items-center overflow-hidden bg-gradient-to-b from-[#0f172a] via-[#0f172a] to-[#0f172a]"
     >
+      {/* Background Dot-Grid with Fade Radial Mask */}
+      <div
+        className="absolute inset-0 z-0 pointer-events-none opacity-25"
+        style={{
+          backgroundImage: "radial-gradient(#334155 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
+          maskImage: "radial-gradient(ellipse at center, black 40%, transparent 80%)",
+          WebkitMaskImage: "radial-gradient(ellipse at center, black 40%, transparent 80%)",
+        }}
+      />
+
       {/* Accent-blue glow / blur effect behind Hero contents */}
-      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] sm:w-[550px] sm:h-[550px] bg-[#3b82f6]/15 rounded-full blur-[90px] sm:blur-[130px] pointer-events-none z-0" />
-      <div className="absolute bottom-1/4 right-1/4 translate-x-1/4 translate-y-1/4 w-[300px] h-[300px] bg-[#2563eb]/10 rounded-full blur-[100px] pointer-events-none z-0" />
+      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] sm:w-[550px] sm:h-[550px] bg-[#3b82f6]/10 rounded-full blur-[90px] sm:blur-[130px] pointer-events-none z-0" />
+      <div className="absolute bottom-1/4 right-1/4 translate-x-1/4 translate-y-1/4 w-[300px] h-[300px] bg-[#2563eb]/5 rounded-full blur-[100px] pointer-events-none z-0" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -31,9 +42,9 @@ export default function Hero() {
               style={{ animationDelay: "100ms" }}
               className="animate-fade-in-up text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tighter text-[#f8fafc] leading-tight"
             >
-              Building Web Apps &{" "}
+              Building AI-Powered Products &{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3b82f6] to-[#60a5fa]">
-                AI-Powered Tools
+                High-Performance Web Applications
               </span>
             </h1>
 
@@ -73,21 +84,40 @@ export default function Hero() {
             className="animate-fade-in-up lg:col-span-5 w-full relative group"
           >
             {/* Soft accent glow behind code editor */}
-            <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#3b82f6]/20 to-[#60a5fa]/10 blur-xl opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
+            <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#3b82f6]/10 to-[#60a5fa]/5 blur-xl opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
 
             <div className="relative w-full bg-[#1e1e1e] border border-[#334155]/60 rounded-xl shadow-2xl overflow-hidden shadow-black/50">
-              {/* Window Controls */}
-              <div className="flex items-center justify-between px-4 py-3 bg-[#181818] border-b border-[#2d2d2d]">
-                <div className="flex space-x-2">
-                  <span className="w-3 h-3 rounded-full bg-[#ff5f56]" />
-                  <span className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
-                  <span className="w-3 h-3 rounded-full bg-[#27c93f]" />
+              {/* Refined Tab Bar */}
+              <div className="flex flex-col bg-[#181818] border-b border-[#2d2d2d]">
+                {/* Window Controls & Title */}
+                <div className="flex items-center justify-between px-4 py-2 bg-[#141414] border-b border-[#202020]/50">
+                  <div className="flex space-x-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+                  </div>
+                  <span className="text-[10px] font-mono text-[#666666] uppercase tracking-wider">Editor Workspace</span>
+                  <div className="w-10" /> {/* Spacer */}
                 </div>
-                <div className="flex items-center space-x-2 text-xs font-mono text-[#858585]">
-                  <Terminal className="w-3.5 h-3.5 text-[#3b82f6]" />
-                  <span>docsim-gemini.ts</span>
+
+                {/* Tabs */}
+                <div className="flex items-end overflow-x-auto scrollbar-none font-mono text-xs text-[#858585]">
+                  {/* Tab 1: Active */}
+                  <div className="flex items-center space-x-2 px-4 py-2 bg-[#1e1e1e] border-r border-[#2d2d2d] border-t-2 border-t-[#3b82f6] text-[#d4d4d4] cursor-default">
+                    <Terminal className="w-3.5 h-3.5 text-[#3b82f6]" />
+                    <span className="font-semibold">docsim-gemini.ts</span>
+                  </div>
+                  {/* Tab 2: Muted */}
+                  <div className="flex items-center space-x-2 px-4 py-2 bg-[#181818]/60 hover:bg-[#181818] border-r border-[#2d2d2d] hover:text-[#999] cursor-pointer transition-colors duration-150">
+                    <Terminal className="w-3.5 h-3.5 text-[#858585]" />
+                    <span>noky-ai.ts</span>
+                  </div>
+                  {/* Tab 3: Muted */}
+                  <div className="flex items-center space-x-2 px-4 py-2 bg-[#181818]/60 hover:bg-[#181818] border-r border-[#2d2d2d] hover:text-[#999] cursor-pointer transition-colors duration-150">
+                    <Terminal className="w-3.5 h-3.5 text-[#858585]" />
+                    <span>impossible-quiz.ts</span>
+                  </div>
                 </div>
-                <div className="w-12" /> {/* spacer to center name */}
               </div>
 
               {/* Code Panel — VS Code Dark+ Syntax Colors */}
