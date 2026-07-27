@@ -1,6 +1,6 @@
 "use client";
 
-import { ExternalLink, Briefcase, FileSearch, HeartPulse, Scale, Gamepad2, Keyboard, Brain } from "lucide-react";
+import { ExternalLink, Briefcase, FileSearch, HeartPulse, Scale, Keyboard, Brain } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
 interface Project {
@@ -60,31 +60,20 @@ export default function Projects() {
       sourceUrl: "#",
       categoryIcon: Scale,
     },
-  ];
-
-  const pipelineProjects: Project[] = [
-    {
-      name: "Reflex Lab",
-      category: "Browser Games / UI-UX",
-      statusBadge: "Coming Soon",
-      description:
-        "A free, no-login browser game hub testing reflexes and typing speed through fast, minimal mini-games. Built to showcase frontend performance and UI/UX polish without any backend dependency. Currently in development — launching soon.",
-      techTags: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
-      liveUrl: "#",
-      sourceUrl: "#",
-      categoryIcon: Gamepad2,
-    },
     {
       name: "NOKY",
       category: "Typing & Gamification",
-      statusBadge: "Coming Soon",
+      statusBadge: "Live",
       description:
         "NOKY turns typing practice into a game with AI-generated passages, a global leaderboard, and personal analytics like keyboard heatmaps and consistency scoring. A full gamification system — XP, levels, streaks, achievements — plus an adaptive AI coach keep every session engaging, wrapped in a terminal-inspired dark UI.",
       techTags: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "Gemini API"],
-      liveUrl: "#",
+      liveUrl: "https://typing-speed-test-pi-smoky.vercel.app/",
       sourceUrl: "#",
       categoryIcon: Keyboard,
     },
+  ];
+
+  const pipelineProjects: Project[] = [
     {
       name: "Impossible Quiz Generator",
       category: "AI Quiz Platform",
@@ -121,14 +110,20 @@ export default function Projects() {
           </p>
         </div>
 
-        {/* Featured Projects Grid (Clean 2-column layout for 4 items) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {featuredProjects.map((project) => {
+        {/* Featured Projects Grid (Clean 3-column lg (3+2) and 2-column md (2+2+1) layout for 5 items) */}
+        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-8 max-w-7xl mx-auto">
+          {featuredProjects.map((project, idx) => {
             const IconComponent = project.categoryIcon;
+            let gridSpanningClass = "col-span-1 md:col-span-2 lg:col-span-2";
+            if (idx === 3) {
+              gridSpanningClass = "col-span-1 md:col-span-2 lg:col-span-2 lg:col-start-2";
+            } else if (idx === 4) {
+              gridSpanningClass = "col-span-1 md:col-span-2 md:col-start-2 lg:col-span-2 lg:col-start-auto max-w-xl md:max-w-none lg:max-w-none mx-auto md:mx-0 lg:mx-0 w-full";
+            }
             return (
               <div
                 key={project.name}
-                className="group flex flex-col justify-between bg-[#1e293b] border border-[#334155]/60 hover:border-[#3b82f6]/40 hover:scale-[1.02] hover:-translate-y-1 shadow-xl shadow-black/15 hover:shadow-[#3b82f6]/10 hover:shadow-lg transition-all duration-300"
+                className={`${gridSpanningClass} group flex flex-col justify-between bg-[#1e293b] border border-[#334155]/60 hover:border-[#3b82f6]/40 hover:scale-[1.02] hover:-translate-y-1 shadow-xl shadow-black/15 hover:shadow-[#3b82f6]/10 hover:shadow-lg transition-all duration-300`}
               >
                 {/* Card Main Area - padding unified to p-6 sm:p-8 */}
                 <div className="p-6 sm:p-8 relative flex-grow flex flex-col justify-between">
@@ -249,8 +244,8 @@ export default function Projects() {
             </p>
           </div>
 
-          {/* Pipeline Projects Grid (3-column layout) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {/* Pipeline Projects Container (Constrained and centered 1-card layout) */}
+          <div className="max-w-md mx-auto w-full">
             {pipelineProjects.map((project) => {
               const IconComponent = project.categoryIcon;
               return (
