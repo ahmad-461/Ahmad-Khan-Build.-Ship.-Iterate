@@ -71,17 +71,14 @@ export default function Projects() {
       sourceUrl: "#",
       categoryIcon: Keyboard,
     },
-  ];
-
-  const pipelineProjects: Project[] = [
     {
       name: "Impossible Quiz Generator",
       category: "AI Quiz Platform",
-      statusBadge: "Coming Soon",
+      statusBadge: "Live",
       description:
-        "An AI-powered quiz platform that scales question difficulty in real time using the Gemini API, spanning Programming, Logic, Data Analytics, and CS. Features a full game loop — lives, streaks, timed rounds, a leaderboard — with no login required, demonstrating adaptive AI integration and serverless architecture.",
-      techTags: ["Next.js", "TypeScript", "Tailwind CSS", "Gemini API", "Vercel"],
-      liveUrl: "#",
+        "An AI-powered, adaptive-difficulty trivia platform where every question is generated live via the Gemini API, with a Python difficulty engine scaling challenges from Easy to Impossible in real time. Features an AI Twin opponent racing players through the same live question stream, a narrative-driven Code Escape Room mode, and a Supabase-backed leaderboard with shareable result cards.",
+      techTags: ["Next.js", "TypeScript", "Tailwind CSS", "Python", "Gemini API", "Supabase"],
+      liveUrl: "https://impossiblequiz-app.vercel.app/",
       sourceUrl: "#",
       categoryIcon: Brain,
     },
@@ -110,20 +107,14 @@ export default function Projects() {
           </p>
         </div>
 
-        {/* Featured Projects Grid (Clean 3-column lg (3+2) and 2-column md (2+2+1) layout for 5 items) */}
-        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-8 max-w-7xl mx-auto">
-          {featuredProjects.map((project, idx) => {
+        {/* Featured Projects Grid (Clean 3-column lg (3x2), 2-column md (3 rows of 2), 1-column mobile) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {featuredProjects.map((project) => {
             const IconComponent = project.categoryIcon;
-            let gridSpanningClass = "col-span-1 md:col-span-2 lg:col-span-2";
-            if (idx === 3) {
-              gridSpanningClass = "col-span-1 md:col-span-2 lg:col-span-2 lg:col-start-2";
-            } else if (idx === 4) {
-              gridSpanningClass = "col-span-1 md:col-span-2 md:col-start-2 lg:col-span-2 lg:col-start-auto max-w-xl md:max-w-none lg:max-w-none mx-auto md:mx-0 lg:mx-0 w-full";
-            }
             return (
               <div
                 key={project.name}
-                className={`${gridSpanningClass} group flex flex-col justify-between bg-[#1e293b] border border-[#334155]/60 hover:border-[#3b82f6]/40 hover:scale-[1.02] hover:-translate-y-1 shadow-xl shadow-black/15 hover:shadow-[#3b82f6]/10 hover:shadow-lg transition-all duration-300`}
+                className="group flex flex-col justify-between bg-[#1e293b] border border-[#334155]/60 hover:border-[#3b82f6]/40 hover:scale-[1.02] hover:-translate-y-1 shadow-xl shadow-black/15 hover:shadow-[#3b82f6]/10 hover:shadow-lg transition-all duration-300"
               >
                 {/* Card Main Area - padding unified to p-6 sm:p-8 */}
                 <div className="p-6 sm:p-8 relative flex-grow flex flex-col justify-between">
@@ -228,99 +219,6 @@ export default function Projects() {
               </div>
             );
           })}
-        </div>
-
-        {/* Separated Sub-section: "In the Pipeline" */}
-        <div className="space-y-12 pt-12 border-t border-[#334155]/20">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="text-xs sm:text-sm font-semibold tracking-wider text-[#3b82f6]/80 uppercase font-mono">
-              Future releases
-            </span>
-            <h3 className="text-2xl sm:text-3xl font-bold text-[#f8fafc]/90 tracking-tight">
-              In the Pipeline
-            </h3>
-            <p className="text-xs sm:text-sm text-[#f8fafc]/50 max-w-xl mx-auto leading-relaxed">
-              Active projects currently in planning or early stage development
-            </p>
-          </div>
-
-          {/* Pipeline Projects Container (Constrained and centered 1-card layout) */}
-          <div className="max-w-md mx-auto w-full">
-            {pipelineProjects.map((project) => {
-              const IconComponent = project.categoryIcon;
-              return (
-                <div
-                  key={project.name}
-                  className="group flex flex-col justify-between bg-[#1e293b] border border-[#334155]/40 opacity-70 shadow-black/10 rounded-xl overflow-hidden shadow-xl transition-all duration-300"
-                >
-                  {/* Card Main Area - padding unified to p-6 sm:p-8 */}
-                  <div className="p-6 sm:p-8 relative flex-grow flex flex-col justify-between">
-                    <div>
-                      {/* Header & Status Badge */}
-                      <div className="flex justify-between items-start gap-4 mb-5">
-                        <span className="flex items-center gap-1.5 text-xs font-semibold tracking-wider text-[#3b82f6]/85 uppercase font-mono">
-                          <IconComponent className="w-3.5 h-3.5 flex-shrink-0" />
-                          <span>{project.category}</span>
-                        </span>
-                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold font-mono border bg-transparent text-[#f8fafc]/40 border-[#334155]/60 whitespace-nowrap">
-                          {project.statusBadge}
-                        </span>
-                      </div>
-
-                      {/* Title */}
-                      <h3 className="text-xl sm:text-2xl font-bold mb-3 text-[#f8fafc]/60 group-hover:text-[#3b82f6]/80 transition-colors duration-200">
-                        {project.name}
-                      </h3>
-
-                      {/* Description - comfortable line width & max width constraint */}
-                      <p className="text-sm sm:text-base leading-relaxed mb-6 max-w-2xl text-[#f8fafc]/45">
-                        {project.description}
-                      </p>
-                    </div>
-
-                    {/* Tech Tags */}
-                    <div className="flex flex-wrap gap-2 mb-2">
-                      {project.techTags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-xs font-medium px-2.5 py-1 rounded-md border font-mono bg-[#0f172a]/20 border-[#334155]/20 text-[#f8fafc]/30"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="px-6 py-4 sm:px-8 sm:py-5 bg-[#0f172a]/40 border-t border-[#334155]/50 flex items-center gap-4">
-                    <button
-                      disabled
-                      title="Coming Soon"
-                      className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#3b82f6]/10 border border-[#3b82f6]/20 text-[#f8fafc]/30 text-sm font-medium cursor-not-allowed transition-all duration-200"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      <span>Coming Soon</span>
-                    </button>
-
-                    <button
-                      disabled
-                      title="Coming Soon"
-                      className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#1e293b]/40 border border-[#334155]/20 text-[#f8fafc]/25 text-sm font-medium cursor-not-allowed transition-all duration-200"
-                    >
-                      <svg
-                        className="w-4 h-4 fill-current text-[#f8fafc]/25"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                      </svg>
-                      <span>Source</span>
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
         </div>
 
       </ScrollReveal>
