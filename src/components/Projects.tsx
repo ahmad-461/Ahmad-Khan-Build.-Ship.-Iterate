@@ -1,6 +1,6 @@
 "use client";
 
-import { ExternalLink, Briefcase, FileSearch, HeartPulse, Scale, Keyboard, Brain } from "lucide-react";
+import { ExternalLink, Briefcase, FileSearch, HeartPulse, Scale, Keyboard, Brain, BarChart3 } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
 interface Project {
@@ -16,6 +16,17 @@ interface Project {
 
 export default function Projects() {
   const featuredProjects: Project[] = [
+    {
+      name: "InsightLoop",
+      category: "Data Analytics & AI",
+      statusBadge: "Live",
+      description:
+        "A full-stack AI business intelligence platform that turns spreadsheets into instant, interactive dashboards. Users upload a CSV or Excel file and DuckDB-WASM — an analytical SQL engine running entirely in the browser — generates charts and KPIs on the fly, with no data ever leaving the device. An AI analyst powered by Gemini answers plain-English questions by writing and running SQL queries in real time, while a Python serverless backend using pandas and numpy adds trend forecasting, outlier detection, and correlation analysis. Dashboards and chat history save via Supabase, and reports export as polished PDFs using jsPDF.",
+      techTags: ["Next.js", "TypeScript", "DuckDB-WASM", "Python", "Gemini API", "Supabase"],
+      liveUrl: "https://insightloop-sand.vercel.app/",
+      sourceUrl: "#",
+      categoryIcon: BarChart3,
+    },
     {
       name: "Freelance Ops Toolkit",
       category: "Freelancer Productivity Suite",

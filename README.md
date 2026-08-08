@@ -12,6 +12,7 @@ I'm a Computer Science student at Nawaz Sharif University of Agriculture, Multan
 
 | Project | Description | Live Demo |
 |---|---|---|
+| **InsightLoop** | Full-stack AI business intelligence platform that turns spreadsheets into instant, interactive dashboards entirely in-browser using DuckDB-WASM, Gemini, and a serverless Python backend. | [Visit](https://insightloop-sand.vercel.app/) |
 | **Freelance Ops Toolkit** | Free, no-login web app with 15 tools for freelancers | [Visit](https://freelance-ops-toolkit.vercel.app/) |
 | **DocSim Checker** | Full-stack document similarity checker with hand-written TF-IDF engine and Gemini API integration | [Visit](https://docsim-checker.vercel.app/) |
 | **RxReader** | AI-powered prescription reader — explains medicines in plain English in 15 seconds | [Visit](https://medical-120-nu.vercel.app/) |
