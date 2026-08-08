@@ -7,21 +7,21 @@ export default function About() {
   const stats = [
     {
       id: 1,
-      metric: "2+",
+      metric: "7+",
       label: "Live Projects",
       desc: "Production-ready, interactive web tools used daily.",
       icon: <Award className="w-6 h-6 text-[#3b82f6]" />,
     },
     {
       id: 2,
-      metric: "1",
-      label: "Full-Stack App",
+      metric: "7",
+      label: "Full-Stack Apps",
       desc: "End-to-end integration with custom logic & secure databases.",
       icon: <Briefcase className="w-6 h-6 text-[#3b82f6]" />,
     },
     {
       id: 3,
-      metric: "3+",
+      metric: "6+",
       label: "AI Integrations",
       desc: "Deploying generative API workflows & prompt-engineered features.",
       icon: <Cpu className="w-6 h-6 text-[#3b82f6]" />,
