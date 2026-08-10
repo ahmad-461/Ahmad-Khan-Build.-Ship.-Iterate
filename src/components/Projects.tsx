@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { ExternalLink, Briefcase, FileSearch, HeartPulse, Scale, Keyboard, Brain, BarChart3 } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
@@ -12,9 +13,13 @@ interface Project {
   liveUrl: string;
   sourceUrl: string;
   categoryIcon: React.ComponentType<{ className?: string }>;
+  isAIPowered: boolean;
+  isFullStack: boolean;
 }
 
 export default function Projects() {
+  const [activeFilter, setActiveFilter] = useState<"All" | "AI-Powered" | "Full-Stack">("All");
+
   const featuredProjects: Project[] = [
     {
       name: "InsightLoop",
@@ -26,6 +31,8 @@ export default function Projects() {
       liveUrl: "https://insightloop-sand.vercel.app/",
       sourceUrl: "#",
       categoryIcon: BarChart3,
+      isAIPowered: true,
+      isFullStack: true,
     },
     {
       name: "Freelance Ops Toolkit",
@@ -37,6 +44,8 @@ export default function Projects() {
       liveUrl: "https://freelance-ops-toolkit.vercel.app/",
       sourceUrl: "#",
       categoryIcon: Briefcase,
+      isAIPowered: false,
+      isFullStack: true,
     },
     {
       name: "DocSim Checker",
@@ -48,6 +57,8 @@ export default function Projects() {
       liveUrl: "https://docsim-checker.vercel.app/",
       sourceUrl: "#",
       categoryIcon: FileSearch,
+      isAIPowered: true,
+      isFullStack: true,
     },
     {
       name: "RxReader — AI Prescription Reader",
@@ -59,6 +70,8 @@ export default function Projects() {
       liveUrl: "https://medical-120-nu.vercel.app/",
       sourceUrl: "#",
       categoryIcon: HeartPulse,
+      isAIPowered: true,
+      isFullStack: false,
     },
     {
       name: "Clario — Untangle Confusing Information",
@@ -70,6 +83,8 @@ export default function Projects() {
       liveUrl: "https://clario-one-delta.vercel.app/",
       sourceUrl: "#",
       categoryIcon: Scale,
+      isAIPowered: true,
+      isFullStack: false,
     },
     {
       name: "NOKY",
@@ -81,6 +96,8 @@ export default function Projects() {
       liveUrl: "https://typing-speed-test-pi-smoky.vercel.app/",
       sourceUrl: "#",
       categoryIcon: Keyboard,
+      isAIPowered: true,
+      isFullStack: true,
     },
     {
       name: "Impossible Quiz Generator",
@@ -92,8 +109,16 @@ export default function Projects() {
       liveUrl: "https://impossiblequiz-app.vercel.app/",
       sourceUrl: "#",
       categoryIcon: Brain,
+      isAIPowered: true,
+      isFullStack: true,
     },
   ];
+
+  const filteredProjects = featuredProjects.filter((project) => {
+    if (activeFilter === "AI-Powered") return project.isAIPowered;
+    if (activeFilter === "Full-Stack") return project.isFullStack;
+    return true;
+  });
 
   return (
     <section
@@ -101,13 +126,13 @@ export default function Projects() {
       className="py-24 md:py-32 bg-[#0f172a] border-t border-[#334155]/40 relative overflow-hidden"
     >
       {/* Subtle Background Accent */}
-      <div className="absolute top-1/3 right-10 w-[300px] h-[300px] bg-[#3b82f6]/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/3 right-10 w-[300px] h-[300px] bg-[#06b6d4]/5 rounded-full blur-[100px] pointer-events-none" />
 
-      <ScrollReveal className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-24">
+      <ScrollReveal className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="text-xs sm:text-sm font-semibold tracking-wider text-[#3b82f6] uppercase font-mono">
+          <span className="text-xs sm:text-sm font-semibold tracking-wider text-[#06b6d4] uppercase font-mono">
             Selected Work
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-[#f8fafc] tracking-tight">
@@ -118,28 +143,47 @@ export default function Projects() {
           </p>
         </div>
 
-        {/* Featured Projects Grid (Clean 3-column lg (3x2), 2-column md (3 rows of 2), 1-column mobile) */}
+        {/* Filter Tabs */}
+        <div className="flex justify-center items-center">
+          <div className="inline-flex p-1.5 rounded-xl bg-[#1e293b] border border-[#334155]/60 shadow-lg gap-2">
+            {(["All", "AI-Powered", "Full-Stack"] as const).map((filter) => (
+              <button
+                key={filter}
+                onClick={() => setActiveFilter(filter)}
+                className={`px-4 py-2 text-xs sm:text-sm font-semibold font-mono rounded-lg transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#06b6d4] focus-visible:outline-none ${
+                  activeFilter === filter
+                    ? "bg-[#06b6d4] text-white shadow-md shadow-[#06b6d4]/20"
+                    : "text-[#f8fafc]/60 hover:text-[#06b6d4] hover:bg-[#0f172a]/40"
+                }`}
+              >
+                {filter}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Featured Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {featuredProjects.map((project) => {
+          {filteredProjects.map((project) => {
             const IconComponent = project.categoryIcon;
             return (
               <div
                 key={project.name}
-                className="group flex flex-col justify-between bg-[#1e293b] border border-[#334155]/60 hover:border-[#3b82f6]/40 hover:scale-[1.02] hover:-translate-y-1 shadow-xl shadow-black/15 hover:shadow-[#3b82f6]/10 hover:shadow-lg transition-all duration-300"
+                className="group flex flex-col justify-between bg-[#1e293b] border border-[#334155]/60 hover:border-[#06b6d4]/40 hover:scale-[1.02] hover:-translate-y-1 shadow-xl shadow-black/15 hover:shadow-[#06b6d4]/10 hover:shadow-lg transition-all duration-300 rounded-xl overflow-hidden"
               >
                 {/* Card Main Area - padding unified to p-6 sm:p-8 */}
                 <div className="p-6 sm:p-8 relative flex-grow flex flex-col justify-between">
                   <div>
                     {/* Header & Status Badge */}
                     <div className="flex justify-between items-start gap-4 mb-5">
-                      <span className="flex items-center gap-1.5 text-xs font-semibold tracking-wider text-[#3b82f6]/85 uppercase font-mono">
+                      <span className="flex items-center gap-1.5 text-xs font-semibold tracking-wider text-[#06b6d4]/85 uppercase font-mono">
                         <IconComponent className="w-3.5 h-3.5 flex-shrink-0" />
                         <span>{project.category}</span>
                       </span>
                       <span
                         className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold font-mono border whitespace-nowrap ${
                           project.statusBadge === "Live"
-                            ? "bg-[#3b82f6] text-white border-transparent"
+                            ? "bg-[#06b6d4] text-white border-transparent"
                             : "bg-[#8b5cf6] text-white border-transparent"
                         }`}
                       >
@@ -148,7 +192,7 @@ export default function Projects() {
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-xl sm:text-2xl font-bold mb-3 text-[#f8fafc] group-hover:text-[#3b82f6] transition-colors duration-200">
+                    <h3 className="text-xl sm:text-2xl font-bold mb-3 text-[#f8fafc] group-hover:text-[#06b6d4] transition-colors duration-200">
                       {project.name}
                     </h3>
 
@@ -177,7 +221,7 @@ export default function Projects() {
                     <button
                       disabled
                       title="Coming Soon"
-                      className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#3b82f6]/10 border border-[#3b82f6]/20 text-[#f8fafc]/30 text-sm font-medium cursor-not-allowed transition-all duration-200"
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#06b6d4]/10 border border-[#06b6d4]/20 text-[#f8fafc]/30 text-sm font-medium cursor-not-allowed transition-all duration-200"
                     >
                       <ExternalLink className="w-4 h-4" />
                       <span>Coming Soon</span>
@@ -187,7 +231,7 @@ export default function Projects() {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#3b82f6] hover:bg-[#2563eb] text-white text-sm font-medium shadow-sm transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#06b6d4] hover:bg-[#22d3ee] text-white text-sm font-medium shadow-sm transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#06b6d4] focus-visible:outline-none"
                     >
                       <ExternalLink className="w-4 h-4" />
                       <span>Live Demo</span>
@@ -214,7 +258,7 @@ export default function Projects() {
                       href={project.sourceUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#1e293b] hover:bg-[#334155] border border-[#334155] text-[#f8fafc] text-sm font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#1e293b] hover:bg-[#334155] border border-[#334155] text-[#f8fafc] text-sm font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#06b6d4] focus-visible:outline-none"
                     >
                       <svg
                         className="w-4 h-4 fill-current"

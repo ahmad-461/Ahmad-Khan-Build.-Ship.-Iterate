@@ -10,7 +10,7 @@ export default function Footer() {
           <h3 className="text-lg font-bold text-[#f8fafc] tracking-tight">
             Muhammad Ahmad Khan
           </h3>
-          <p className="text-sm text-[#3b82f6] font-semibold font-mono-accent uppercase tracking-wider">
+          <p className="text-sm text-[#06b6d4] font-semibold uppercase tracking-wider">
             Build. Ship. Iterate.
           </p>
         </div>
@@ -24,7 +24,7 @@ export default function Footer() {
         <div className="w-16 h-px bg-[#334155] mx-auto" />
 
         {/* Copyright */}
-        <p className="text-xs text-gray-500 font-mono-accent">
+        <p className="text-xs text-gray-500 font-mono">
           &copy; 2026 All rights reserved
         </p>
 

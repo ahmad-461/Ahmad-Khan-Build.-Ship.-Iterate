@@ -41,7 +41,7 @@ body::after {
   border-radius: 5px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3b82f6;
+  background: #06b6d4;
 }
 
 /* Scroll reveal initial and active states */
@@ -82,7 +82,7 @@ textarea:focus-visible,
 select:focus-visible {
   outline: none;
   outline-offset: 2px;
-  box-shadow: 0 0 0 2px #0f172a, 0 0 0 4px #3b82f6;
+  box-shadow: 0 0 0 2px #0f172a, 0 0 0 4px #06b6d4;
 }
 
 /* Support prefers-reduced-motion globally */

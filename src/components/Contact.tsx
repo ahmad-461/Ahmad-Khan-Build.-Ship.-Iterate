@@ -9,13 +9,13 @@ export default function Contact() {
       name: "Email Address",
       value: "ahmad.khan8747763@gmail.com",
       href: "mailto:ahmad.khan8747763@gmail.com",
-      icon: <Mail className="w-6 h-6 text-[#3b82f6]" />,
+      icon: <Mail className="w-6 h-6 text-[#06b6d4]" />,
     },
     {
       name: "Phone Number",
       value: "+92 319 8747763",
       href: "tel:+923198747763",
-      icon: <Phone className="w-6 h-6 text-[#3b82f6]" />,
+      icon: <Phone className="w-6 h-6 text-[#06b6d4]" />,
     },
     {
       name: "GitHub Profile",
@@ -23,7 +23,7 @@ export default function Contact() {
       href: "https://github.com/ahmad-461",
       icon: (
         <svg
-          className="w-6 h-6 fill-[#3b82f6]"
+          className="w-6 h-6 fill-[#06b6d4]"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -37,7 +37,7 @@ export default function Contact() {
       href: "https://www.linkedin.com/in/ahmad-khan-77441833a",
       icon: (
         <svg
-          className="w-6 h-6 fill-[#3b82f6]"
+          className="w-6 h-6 fill-[#06b6d4]"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -53,13 +53,13 @@ export default function Contact() {
       className="py-24 md:py-32 bg-[#0f172a] border-t border-[#334155]/40 relative overflow-hidden"
     >
       {/* Subtle Background Accent */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-[#3b82f6]/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-[#06b6d4]/5 rounded-full blur-[100px] pointer-events-none" />
 
       <ScrollReveal className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-2">
-          <span className="text-xs sm:text-sm font-semibold tracking-wider text-[#3b82f6] uppercase font-mono">
+          <span className="text-xs sm:text-sm font-semibold tracking-wider text-[#06b6d4] uppercase font-mono">
             Collaboration
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-[#f8fafc] tracking-tight">
@@ -78,10 +78,10 @@ export default function Contact() {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group block p-6 sm:p-8 rounded-xl bg-[#1e293b] border border-[#334155]/60 hover:border-[#3b82f6]/40 hover:bg-[#1e293b]/80 transition-all duration-300 shadow-xl shadow-black/10 text-left hover:shadow-[#3b82f6]/5 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+              className="group block p-6 sm:p-8 rounded-xl bg-[#1e293b] border border-[#334155]/60 hover:border-[#06b6d4]/40 hover:bg-[#1e293b]/80 transition-all duration-300 shadow-xl shadow-black/10 text-left hover:shadow-[#06b6d4]/5 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#06b6d4] focus-visible:outline-none"
             >
               <div className="flex justify-between items-start mb-6">
-                <div className="p-3 rounded-lg bg-[#0f172a] border border-[#334155]/60 group-hover:bg-[#3b82f6]/10 group-hover:border-[#3b82f6]/30 transition-all duration-300 flex items-center justify-center">
+                <div className="p-3 rounded-lg bg-[#0f172a] border border-[#334155]/60 group-hover:bg-[#06b6d4]/10 group-hover:border-[#06b6d4]/30 transition-all duration-300 flex items-center justify-center">
                   {link.icon}
                 </div>
               </div>
@@ -90,7 +90,7 @@ export default function Contact() {
                 <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2 font-mono">
                   {link.name}
                 </h3>
-                <p className="text-sm sm:text-base font-bold text-[#f8fafc] group-hover:text-[#3b82f6] transition-colors duration-200 break-all">
+                <p className="text-sm sm:text-base font-bold text-[#f8fafc] group-hover:text-[#06b6d4] transition-colors duration-200 break-all">
                   {link.value}
                 </p>
               </div>
