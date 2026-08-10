@@ -23,18 +23,15 @@ export default function Skills() {
     {
       title: "Tools & Deployment",
       icon: <Settings className="w-5 h-5 text-[#06b6d4]" />,
-      skills: ["Git/GitHub", "Vercel", "Jules (AI coding agent)"],
+      skills: ["Git/GitHub", "Vercel", "Jules (AI agent)"],
     },
   ];
 
   return (
     <section
       id="skills"
-      className="py-24 md:py-32 bg-[#0f172a] border-t border-[#334155]/40 relative overflow-hidden"
+      className="py-24 md:py-32 bg-[#0f172a] border-t border-[#334155]/20 relative overflow-hidden"
     >
-      {/* Subtle Background Decor */}
-      <div className="absolute top-1/2 left-10 -translate-y-1/2 w-[200px] h-[200px] bg-[#06b6d4]/5 rounded-full blur-[80px] pointer-events-none" />
-
       <ScrollReveal className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Section Header */}
@@ -45,7 +42,7 @@ export default function Skills() {
           <h2 className="text-3xl sm:text-4xl font-bold text-[#f8fafc] tracking-tight">
             Skills & Technologies
           </h2>
-          <p className="text-sm sm:text-base text-[#f8fafc]/60 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base text-[#f8fafc]/50 max-w-2xl mx-auto leading-relaxed">
             A specialized stack focused on developing speed-optimized, modern web architectures integrated with smart generative intelligence.
           </p>
         </div>
@@ -55,25 +52,25 @@ export default function Skills() {
           {skillCategories.map((category) => (
             <div
               key={category.title}
-              className="p-6 sm:p-8 rounded-xl bg-[#1e293b] border border-[#334155]/60 hover:border-[#06b6d4]/40 hover:shadow-lg hover:shadow-[#06b6d4]/5 transition-all duration-300 shadow-xl shadow-black/10 flex flex-col justify-between focus-within:ring-2 focus-within:ring-[#06b6d4] focus-within:outline-none"
+              className="p-6 rounded-lg bg-[#1e293b]/40 border border-[#334155]/20 hover:border-[#06b6d4]/20 transition-all duration-200 flex flex-col justify-between"
             >
               <div>
                 {/* Category Header */}
                 <div className="flex items-center space-x-3 mb-6">
-                  <div className="p-2 rounded-lg bg-[#0f172a] border border-[#334155]/60">
+                  <div className="text-[#06b6d4]/80">
                     {category.icon}
                   </div>
-                  <h3 className="font-bold text-[#f8fafc] text-base sm:text-lg">
+                  <h3 className="font-bold text-[#f8fafc] text-sm sm:text-base uppercase tracking-wider">
                     {category.title}
                   </h3>
                 </div>
 
-                {/* Skill Tags */}
-                <div className="flex flex-wrap gap-2.5">
+                {/* Minimal Skill Tags - quiet styles, small text, minimal color accents */}
+                <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="px-3 py-1.5 rounded-lg bg-[#0f172a] border border-[#334155]/40 text-xs sm:text-sm font-medium text-[#f8fafc]/80 hover:text-[#06b6d4] hover:border-[#06b6d4]/50 transition-all duration-200 font-mono"
+                      className="px-2.5 py-1 rounded-md bg-[#0f172a]/40 border border-[#334155]/20 text-xs text-[#f8fafc]/60 hover:text-[#06b6d4] hover:border-[#06b6d4]/20 transition-all duration-200 font-mono"
                     >
                       {skill}
                     </span>

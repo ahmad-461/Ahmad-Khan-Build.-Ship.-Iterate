@@ -82,7 +82,7 @@ export default function Navbar() {
       ref={menuRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled || isOpen
-          ? "bg-[#0f172a]/95 backdrop-blur-md border-b border-[#334155]/60 shadow-lg shadow-[#000000]/20"
+          ? "bg-[#0f172a]/95 backdrop-blur-md border-b border-[#334155]/30"
           : "bg-transparent border-b border-transparent"
       }`}
     >
@@ -109,14 +109,14 @@ export default function Navbar() {
                   className={`text-sm font-medium transition-colors py-1.5 px-1 lg:px-2 relative focus-visible:ring-2 focus-visible:ring-[#06b6d4] focus-visible:outline-none rounded-md ${
                     isActive
                       ? "text-[#06b6d4]"
-                      : "text-[#f8fafc]/80 hover:text-[#06b6d4]"
+                      : "text-[#f8fafc]/70 hover:text-[#06b6d4]"
                   }`}
                 >
                   {link.name}
-                  {/* Active bottom border line */}
+                  {/* Active bottom line - flatter and more understated */}
                   <span
-                    className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[#06b6d4] transition-all duration-300 origin-center ${
-                      isActive ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"
+                    className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[#06b6d4] transition-all duration-200 origin-center ${
+                      isActive ? "scale-x-75 opacity-100" : "scale-x-0 opacity-0"
                     }`}
                   />
                 </a>
@@ -129,7 +129,7 @@ export default function Navbar() {
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
-              className="inline-flex items-center justify-center p-2.5 rounded-lg text-[#f8fafc]/80 hover:text-[#06b6d4] hover:bg-[#1e293b] focus-visible:ring-2 focus-visible:ring-[#06b6d4] focus-visible:outline-none transition-colors"
+              className="inline-flex items-center justify-center p-2.5 rounded-lg text-[#f8fafc]/80 hover:text-[#06b6d4] hover:bg-[#1e293b]/40 focus-visible:ring-2 focus-visible:ring-[#06b6d4] focus-visible:outline-none transition-colors"
               aria-controls="mobile-menu"
               aria-expanded={isOpen}
             >
@@ -144,7 +144,7 @@ export default function Navbar() {
       <div
         className={`md:hidden transition-all duration-300 ease-in-out ${
           isOpen
-            ? "max-h-80 opacity-100 border-t border-[#334155]/40 bg-[#0f172a]"
+            ? "max-h-80 opacity-100 border-t border-[#334155]/30 bg-[#0f172a]"
             : "max-h-0 opacity-0 overflow-hidden pointer-events-none"
         }`}
         id="mobile-menu"
@@ -159,8 +159,8 @@ export default function Navbar() {
                 onClick={() => setIsOpen(false)}
                 className={`block px-3 py-2.5 rounded-lg text-base font-medium transition-colors focus-visible:ring-2 focus-visible:ring-[#06b6d4] focus-visible:outline-none ${
                   isActive
-                    ? "text-[#06b6d4] bg-[#06b6d4]/10 border-l-4 border-[#06b6d4]"
-                    : "text-[#f8fafc]/80 hover:text-[#06b6d4] hover:bg-[#1e293b]"
+                    ? "text-[#06b6d4] bg-[#06b6d4]/5 border-l-2 border-[#06b6d4]"
+                    : "text-[#f8fafc]/70 hover:text-[#06b6d4] hover:bg-[#1e293b]/40"
                 }`}
               >
                 {link.name}
