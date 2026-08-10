@@ -1,20 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { Mail, Phone, ArrowRight } from "lucide-react";
+import { Mail, Phone, ArrowUpRight } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
-type InquiryReason = "Internship Opportunity" | "Freelance Project" | "Collaboration" | "General Inquiry";
-
 export default function Contact() {
-  const [selectedReason, setSelectedReason] = useState<InquiryReason>("Collaboration");
-
-  // Form states
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
-
   const contactLinks = [
     {
       name: "Email Address",
@@ -44,7 +33,7 @@ export default function Contact() {
     },
     {
       name: "LinkedIn Network",
-      value: "Connect on LinkedIn",
+      value: "linkedin.com/in/ahmad-khan-77441833a",
       href: "https://www.linkedin.com/in/ahmad-khan-77441833a",
       icon: (
         <svg
@@ -58,243 +47,67 @@ export default function Contact() {
     },
   ];
 
-  const validateForm = () => {
-    const tempErrors: typeof errors = {};
-    if (!name.trim()) {
-      tempErrors.name = "Full name is required.";
-    }
-    if (!email.trim()) {
-      tempErrors.email = "Email address is required.";
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      tempErrors.email = "Please enter a valid email address.";
-    }
-    if (!message.trim()) {
-      tempErrors.message = "Message text cannot be empty.";
-    }
-    setErrors(tempErrors);
-    return Object.keys(tempErrors).length === 0;
-  };
-
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
-
-    const subject = `[${selectedReason}] Message from ${name}`;
-    const body = `Hi Ahmad,\n\nName: ${name}\nEmail: ${email}\nReason: ${selectedReason}\n\nMessage:\n${message}\n\nSent from your Portfolio.`;
-
-    const mailtoUrl = `mailto:ahmad.khan8747763@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    // Trigger opening of email client safely
-    window.location.href = mailtoUrl;
-  };
-
   return (
     <section
       id="contact"
       className="py-24 md:py-32 bg-[#0b0f19] border-t border-[#334155]/40 relative overflow-hidden"
     >
       {/* Subtle Background Lighting Accent */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-[#06b6d4]/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#06b6d4]/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <ScrollReveal className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <ScrollReveal className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        {/* Header Block */}
+        <div className="space-y-4 mb-16">
+          <span className="text-xs sm:text-sm font-semibold tracking-widest text-[#06b6d4] uppercase font-mono block">
+            CONNECT
+          </span>
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-[#f8fafc] tracking-tight">
+            Let&apos;s Connect
+          </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-
-          {/* Left Column: Let's Work Together & Availability & Direct Contacts */}
-          <div className="lg:col-span-5 space-y-8">
-            <div className="space-y-4">
-              <span className="text-xs sm:text-sm font-semibold tracking-wider text-[#06b6d4] uppercase font-mono">
-                Connect
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-[#f8fafc] tracking-tight">
-                Let&apos;s Work Together
-              </h2>
-              <p className="text-sm sm:text-base text-[#f8fafc]/60 leading-relaxed max-w-md">
-                Interested in working together, discussing an opportunity, or building something meaningful? I&apos;d love to hear from you.
-              </p>
-            </div>
-
-            {/* Subtle Availability Indicator Card */}
-            <div className="p-5 sm:p-6 rounded-xl bg-[#1e293b]/50 border border-[#334155]/40 hover:border-[#06b6d4]/30 transition-all relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-16 h-16 bg-[#22c55e]/5 rounded-bl-full pointer-events-none" />
-
-              {/* Status Header */}
-              <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#334155]/40">
-                <span className="text-xs font-bold tracking-wider text-slate-400 uppercase font-mono">
-                  Current Status
-                </span>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  Available
-                </span>
-              </div>
-
-              {/* Open Positions List */}
-              <div className="space-y-3">
-                <div className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-300 font-mono">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#06b6d4]" />
-                  <span>Software Engineering Internships</span>
-                </div>
-                <div className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-300 font-mono">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#06b6d4]" />
-                  <span>AI / Full-Stack Projects</span>
-                </div>
-                <div className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-300 font-mono">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#06b6d4]" />
-                  <span>Freelance Opportunities</span>
-                </div>
-                <div className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-300 font-mono">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#06b6d4]" />
-                  <span>Technical Collaborations</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Direct Contact Links */}
-            <div className="grid grid-cols-2 gap-4">
-              {contactLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group p-4 rounded-xl bg-[#1e293b]/40 border border-[#334155]/50 hover:border-[#06b6d4]/30 hover:bg-[#1e293b]/70 transition-all duration-200 shadow-md shadow-black/5 text-left focus-visible:ring-1 focus-visible:ring-[#06b6d4] focus-visible:outline-none min-h-[110px] flex flex-col justify-between"
-                >
-                  <div className="p-2 w-fit rounded-lg bg-[#0f172a] border border-[#334155]/60 group-hover:bg-[#06b6d4]/10 group-hover:border-[#06b6d4]/30 transition-all flex items-center justify-center">
-                    {link.icon}
-                  </div>
-                  <div>
-                    <h4 className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-0.5 font-mono">
-                      {link.name}
-                    </h4>
-                    <p className="text-xs font-bold text-slate-200 group-hover:text-[#06b6d4] transition-colors duration-150 truncate">
-                      {link.value}
-                    </p>
-                  </div>
-                </a>
-              ))}
-            </div>
+          {/* Subtle Status Indicator */}
+          <div className="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-[#10b981]/10 border border-[#10b981]/20 text-[#10b981] text-xs font-mono font-medium mt-2">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10b981] opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#10b981]" />
+            </span>
+            <span>Available for Internships, Projects & Collaborations</span>
           </div>
 
-          {/* Right Column: Premium, Compact Contact Form */}
-          <div className="lg:col-span-7">
-            <form
-              onSubmit={handleFormSubmit}
-              className="p-6 sm:p-8 rounded-xl bg-[#1e293b] border border-[#334155]/60 hover:border-[#334155]/80 transition-all shadow-xl shadow-black/15 space-y-6 text-left"
-            >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {/* Name */}
-                <div className="space-y-1.5">
-                  <label htmlFor="name-input" className="text-xs font-bold text-slate-300 font-mono uppercase tracking-wider block">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name-input"
-                    value={name}
-                    onChange={(e) => {
-                      setName(e.target.value);
-                      if (errors.name) setErrors((prev) => ({ ...prev, name: undefined }));
-                    }}
-                    placeholder="John Doe"
-                    className={`w-full bg-[#0f172a] border rounded-lg px-4 py-2.5 text-sm text-[#f8fafc] placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-[#06b6d4] transition-all ${
-                      errors.name ? "border-red-500/50" : "border-[#334155]/60 hover:border-[#334155]/90"
-                    }`}
-                  />
-                  {errors.name && (
-                    <span className="text-[11px] text-red-400 font-mono block">{errors.name}</span>
-                  )}
-                </div>
-
-                {/* Email */}
-                <div className="space-y-1.5">
-                  <label htmlFor="email-input" className="text-xs font-bold text-slate-300 font-mono uppercase tracking-wider block">
-                    Email
-                  </label>
-                  <input
-                    type="text"
-                    id="email-input"
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                      if (errors.email) setErrors((prev) => ({ ...prev, email: undefined }));
-                    }}
-                    placeholder="recruiter@company.com"
-                    className={`w-full bg-[#0f172a] border rounded-lg px-4 py-2.5 text-sm text-[#f8fafc] placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-[#06b6d4] transition-all ${
-                      errors.email ? "border-red-500/50" : "border-[#334155]/60 hover:border-[#334155]/90"
-                    }`}
-                  />
-                  {errors.email && (
-                    <span className="text-[11px] text-red-400 font-mono block">{errors.email}</span>
-                  )}
-                </div>
-              </div>
-
-              {/* Subject / Reason Choice Pills */}
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-300 font-mono uppercase tracking-wider block">
-                  Subject / Reason
-                </label>
-                <div className="flex flex-wrap gap-2">
-                  {(["Internship Opportunity", "Freelance Project", "Collaboration", "General Inquiry"] as InquiryReason[]).map((reason) => {
-                    const isActive = selectedReason === reason;
-                    return (
-                      <button
-                        type="button"
-                        key={reason}
-                        onClick={() => setSelectedReason(reason)}
-                        className={`text-xs px-3.5 py-2 rounded-lg border font-mono transition-all focus-visible:ring-1 focus-visible:ring-[#06b6d4] focus-visible:outline-none min-h-[44px] ${
-                          isActive
-                            ? "bg-[#06b6d4] text-white border-transparent shadow shadow-[#06b6d4]/20 font-bold"
-                            : "bg-[#0f172a]/60 border-[#334155]/40 hover:border-[#06b6d4]/40 text-slate-300 hover:text-[#06b6d4]"
-                        }`}
-                      >
-                        {reason}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Message */}
-              <div className="space-y-2">
-                <label htmlFor="message-input" className="text-xs font-bold text-slate-300 font-mono uppercase tracking-wider block">
-                  Message
-                </label>
-                <textarea
-                  id="message-input"
-                  rows={4}
-                  value={message}
-                  onChange={(e) => {
-                    setMessage(e.target.value);
-                    if (errors.message) setErrors((prev) => ({ ...prev, message: undefined }));
-                  }}
-                  placeholder="I'd love to discuss..."
-                  className={`w-full bg-[#0f172a] border rounded-lg px-4 py-2.5 text-sm text-[#f8fafc] placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-[#06b6d4] transition-all resize-none ${
-                    errors.message ? "border-red-500/50" : "border-[#334155]/60 hover:border-[#334155]/90"
-                  }`}
-                />
-                {errors.message && (
-                  <span className="text-[11px] text-red-400 font-mono block">{errors.message}</span>
-                )}
-              </div>
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-[#06b6d4] hover:bg-[#22d3ee] text-white font-bold shadow-md shadow-[#06b6d4]/20 transition-all duration-200 transform hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#06b6d4] focus-visible:outline-none min-h-[44px]"
-              >
-                <span>Send Message</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </form>
-          </div>
-
+          <p className="text-base sm:text-lg text-[#f8fafc]/60 leading-relaxed max-w-2xl mx-auto pt-2">
+            Have an opportunity, project, or idea you&apos;d like to discuss? Feel free to reach out.
+          </p>
         </div>
 
+        {/* Contact Options Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left max-w-3xl mx-auto">
+          {contactLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group p-6 rounded-2xl bg-[#1e293b]/40 border border-[#334155]/50 hover:border-[#06b6d4]/40 hover:bg-[#1e293b]/60 transition-all duration-300 shadow-lg shadow-black/10 flex items-center justify-between min-h-[96px] focus-visible:ring-2 focus-visible:ring-[#06b6d4] focus-visible:outline-none hover:shadow-[#06b6d4]/5 motion-safe:hover:-translate-y-1"
+            >
+              <div className="flex items-center gap-4 min-w-0">
+                <div className="p-3 w-12 h-12 rounded-xl bg-[#0f172a] border border-[#334155]/60 group-hover:bg-[#06b6d4]/10 group-hover:border-[#06b6d4]/30 transition-all duration-300 flex items-center justify-center shrink-0 motion-safe:group-hover:scale-105">
+                  {link.icon}
+                </div>
+                <div className="min-w-0">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1 font-mono">
+                    {link.name}
+                  </h4>
+                  <p className="text-sm font-semibold text-slate-200 group-hover:text-[#06b6d4] transition-colors duration-200 truncate pr-1">
+                    {link.value}
+                  </p>
+                </div>
+              </div>
+              <div className="p-1 rounded-lg bg-[#0f172a]/40 border border-[#334155]/20 text-slate-400 group-hover:text-[#06b6d4] group-hover:border-[#06b6d4]/30 transition-all duration-300 shrink-0 motion-safe:group-hover:translate-x-1 motion-safe:group-hover:-translate-y-1">
+                <ArrowUpRight className="w-5 h-5" />
+              </div>
+            </a>
+          ))}
+        </div>
       </ScrollReveal>
     </section>
   );
