@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import WhatIActuallyDo from "@/components/WhatIActuallyDo";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
@@ -11,9 +12,11 @@ import Footer from "@/components/Footer";
 import CaseStudyModal from "@/components/CaseStudyModal";
 
 export default function Home() {
-  // Shared hover state for Interactive Skill-to-Project Connector
+  // Shared hover and click states for Interactive Skill-to-Project Connector
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+  const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+  const [selectedProject, setSelectedProject] = useState<string | null>(null);
 
   // Modal active case study project name state
   const [activeCaseStudyProject, setActiveCaseStudyProject] = useState<string | null>(null);
@@ -28,21 +31,32 @@ export default function Home() {
         {/* 2. Hero Section */}
         <Hero />
 
-        {/* 3. About Section */}
+        {/* 3. What I Actually Do Section */}
+        <WhatIActuallyDo />
+
+        {/* 4. About Section */}
         <About />
 
-        {/* 4. Skills Section */}
+        {/* 5. Skills Section */}
         <Skills
           hoveredSkill={hoveredSkill}
+          selectedSkill={selectedSkill}
           hoveredProject={hoveredProject}
+          selectedProject={selectedProject}
           onHoverSkill={setHoveredSkill}
+          onSelectSkill={setSelectedSkill}
+          onSelectProject={setSelectedProject}
         />
 
-        {/* 5. Featured Projects Section */}
+        {/* 6. Featured Projects Section */}
         <Projects
           hoveredSkill={hoveredSkill}
+          selectedSkill={selectedSkill}
           hoveredProject={hoveredProject}
+          selectedProject={selectedProject}
           onHoverProject={setHoveredProject}
+          onSelectProject={setSelectedProject}
+          onSelectSkill={setSelectedSkill}
           onOpenCaseStudy={setActiveCaseStudyProject}
         />
 
