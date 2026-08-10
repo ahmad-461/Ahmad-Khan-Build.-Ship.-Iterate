@@ -19,8 +19,12 @@ export interface Project {
 
 interface ProjectsProps {
   hoveredSkill: string | null;
+  selectedSkill: string | null;
   hoveredProject: string | null;
+  selectedProject: string | null;
   onHoverProject: (projectName: string | null) => void;
+  onSelectProject: (projectName: string | null) => void;
+  onSelectSkill: (skillName: string | null) => void;
   onOpenCaseStudy?: (projectName: string) => void;
 }
 
@@ -140,12 +144,34 @@ export function isProjectMatchingSkill(project: Project, skill: string): boolean
   if (normSkill === "python/flask" && (tags.includes("python") || tags.includes("python/flask"))) return true;
   if (normSkill === "gemini api" && (tags.includes("gemini api") || tags.includes("ai/nlp") || tags.includes("ai vision"))) return true;
   if (normSkill === "prompt engineering" && project.isAIPowered) return true;
-  if (normSkill === "jules (ai coding agent)") return true;
+  if (normSkill === "jules (ai coding agent)" || normSkill === "jules") return true;
+  if (normSkill === "git/github") return true;
+  if (normSkill === "vercel" && tags.includes("vercel")) return true;
+  if (normSkill === "data analysis & visualization" && (project.name === "InsightLoop" || project.name === "DocSim Checker" || project.name === "NOKY")) return true;
+  if (normSkill === "duckdb-wasm" && project.name === "InsightLoop") return true;
   return false;
 }
 
-export default function Projects({ hoveredSkill, onHoverProject, onOpenCaseStudy }: ProjectsProps) {
+export default function Projects({
+  hoveredSkill,
+  selectedSkill,
+  hoveredProject,
+  selectedProject,
+  onHoverProject,
+  onSelectProject,
+  onSelectSkill,
+  onOpenCaseStudy,
+}: ProjectsProps) {
   const [activeFilter, setActiveFilter] = useState<"All" | "AI-Powered" | "Full-Stack">("All");
+
+  const handleProjectCardClick = (projectName: string) => {
+    if (selectedProject === projectName) {
+      onSelectProject(null);
+    } else {
+      onSelectProject(projectName);
+      onSelectSkill(null); // Clear selected skill when selecting a project
+    }
+  };
 
   const filteredProjects = featuredProjects.filter((project) => {
     if (activeFilter === "AI-Powered") return project.isAIPowered;
@@ -201,8 +227,20 @@ export default function Projects({ hoveredSkill, onHoverProject, onOpenCaseStudy
             const IconComponent = project.categoryIcon;
 
             // Skill highlight checks
-            const isHighlighted = hoveredSkill ? isProjectMatchingSkill(project, hoveredSkill) : false;
-            const isMuted = hoveredSkill && !isHighlighted;
+            const activeSkill = hoveredSkill || selectedSkill;
+            const activeProj = hoveredProject || selectedProject;
+
+            const isHighlighted = activeSkill
+              ? isProjectMatchingSkill(project, activeSkill)
+              : activeProj
+                ? activeProj === project.name
+                : false;
+
+            const isMuted = activeSkill
+              ? !isHighlighted
+              : activeProj
+                ? activeProj !== project.name
+                : false;
 
             // Simple CSS-only SVG interactive simulated previews for high performance
             const renderSimulatedPreview = () => {
@@ -393,7 +431,16 @@ export default function Projects({ hoveredSkill, onHoverProject, onOpenCaseStudy
                 key={project.name}
                 onMouseEnter={() => onHoverProject(project.name)}
                 onMouseLeave={() => onHoverProject(null)}
-                className={`group flex flex-col justify-between bg-[#1e293b] border hover:scale-[1.03] hover:-translate-y-1 shadow-xl shadow-black/15 transition-all duration-300 rounded-xl overflow-hidden ${
+                onClick={() => handleProjectCardClick(project.name)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    handleProjectCardClick(project.name);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                className={`group flex flex-col justify-between bg-[#1e293b] border hover:scale-[1.03] hover:-translate-y-1 shadow-xl shadow-black/15 transition-all duration-300 rounded-xl overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#06b6d4] ${
                   isHighlighted
                     ? "border-[#06b6d4] shadow-[#06b6d4]/10 shadow-lg scale-[1.03] -translate-y-1"
                     : isMuted
@@ -442,7 +489,8 @@ export default function Projects({ hoveredSkill, onHoverProject, onOpenCaseStudy
                   {/* Tech Tags */}
                   <div className="flex flex-wrap gap-2 mb-2">
                     {project.techTags.map((tag) => {
-                      const isTagHighlighted = hoveredSkill ? tag.toLowerCase() === hoveredSkill.toLowerCase() : false;
+                      const activeSkill = hoveredSkill || selectedSkill;
+                      const isTagHighlighted = activeSkill ? tag.toLowerCase() === activeSkill.toLowerCase() : false;
                       return (
                         <span
                           key={tag}
@@ -465,6 +513,7 @@ export default function Projects({ hoveredSkill, onHoverProject, onOpenCaseStudy
                     {project.liveUrl === "#" ? (
                       <button
                         disabled
+                        onClick={(e) => e.stopPropagation()}
                         title="Coming Soon"
                         className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-[#06b6d4]/10 border border-[#06b6d4]/20 text-[#f8fafc]/30 text-xs sm:text-sm font-medium cursor-not-allowed transition-all duration-200"
                       >
@@ -474,6 +523,7 @@ export default function Projects({ hoveredSkill, onHoverProject, onOpenCaseStudy
                     ) : (
                       <a
                         href={project.liveUrl}
+                        onClick={(e) => e.stopPropagation()}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-[#06b6d4] hover:bg-[#22d3ee] text-white text-xs sm:text-sm font-medium shadow-sm transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#06b6d4] focus-visible:outline-none"
@@ -486,6 +536,7 @@ export default function Projects({ hoveredSkill, onHoverProject, onOpenCaseStudy
                     {project.sourceUrl === "#" ? (
                       <button
                         disabled
+                        onClick={(e) => e.stopPropagation()}
                         title="Coming Soon"
                         className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-[#1e293b]/40 border border-[#334155]/20 text-[#f8fafc]/25 text-xs sm:text-sm font-medium cursor-not-allowed transition-all duration-200"
                       >
@@ -501,6 +552,7 @@ export default function Projects({ hoveredSkill, onHoverProject, onOpenCaseStudy
                     ) : (
                       <a
                         href={project.sourceUrl}
+                        onClick={(e) => e.stopPropagation()}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-[#1e293b] hover:bg-[#334155] border border-[#334155] text-[#f8fafc] text-xs sm:text-sm font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#06b6d4] focus-visible:outline-none"
