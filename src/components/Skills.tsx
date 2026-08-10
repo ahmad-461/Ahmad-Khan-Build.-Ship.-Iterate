@@ -3,7 +3,15 @@
 import { Code2, Database, Brain, Settings } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
-export default function Skills() {
+import { featuredProjects, isProjectMatchingSkill } from "./Projects";
+
+interface SkillsProps {
+  hoveredSkill: string | null;
+  hoveredProject: string | null;
+  onHoverSkill: (skillName: string | null) => void;
+}
+
+export default function Skills({ hoveredSkill, hoveredProject, onHoverSkill }: SkillsProps) {
   const skillCategories = [
     {
       title: "Frontend",
@@ -26,6 +34,14 @@ export default function Skills() {
       skills: ["Git/GitHub", "Vercel", "Jules (AI coding agent)"],
     },
   ];
+
+  // Helper to check if a specific skill is active/highlighted when hovering a project
+  const isSkillHighlightedByProject = (skillName: string): boolean => {
+    if (!hoveredProject) return false;
+    const project = featuredProjects.find((p) => p.name === hoveredProject);
+    if (!project) return false;
+    return isProjectMatchingSkill(project, skillName);
+  };
 
   return (
     <section
@@ -70,14 +86,28 @@ export default function Skills() {
 
                 {/* Skill Tags */}
                 <div className="flex flex-wrap gap-2.5">
-                  {category.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-1.5 rounded-lg bg-[#0f172a] border border-[#334155]/40 text-xs sm:text-sm font-medium text-[#f8fafc]/80 hover:text-[#06b6d4] hover:border-[#06b6d4]/50 transition-all duration-200 font-mono"
-                    >
-                      {skill}
-                    </span>
-                  ))}
+                  {category.skills.map((skill) => {
+                    const isHovered = hoveredSkill === skill;
+                    const isLinkedHighlight = isSkillHighlightedByProject(skill);
+                    const isMuted = (hoveredSkill && !isHovered) || (hoveredProject && !isLinkedHighlight);
+
+                    return (
+                      <span
+                        key={skill}
+                        onMouseEnter={() => onHoverSkill(skill)}
+                        onMouseLeave={() => onHoverSkill(null)}
+                        className={`px-3 py-1.5 rounded-lg border text-xs sm:text-sm font-medium transition-all duration-200 font-mono cursor-pointer ${
+                          isHovered || isLinkedHighlight
+                            ? "bg-[#06b6d4]/20 border-[#06b6d4] text-[#06b6d4] scale-105 shadow shadow-[#06b6d4]/20"
+                            : isMuted
+                            ? "bg-[#0f172a]/40 border-[#334155]/20 text-[#f8fafc]/30"
+                            : "bg-[#0f172a] border-[#334155]/40 text-[#f8fafc]/80 hover:text-[#06b6d4] hover:border-[#06b6d4]/50"
+                        }`}
+                      >
+                        {skill}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
             </div>

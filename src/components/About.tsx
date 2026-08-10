@@ -58,11 +58,11 @@ export default function About() {
               I work as product owner and decision-maker, directing AI coding agents (<span className="text-[#06b6d4] font-medium">Jules by Google Labs</span>) for implementation while handling architecture, prompt design, and design direction myself. My projects focus on freelancer tooling, document processing, and polished user interfaces.
             </p>
 
-            {/* Added Get In Touch action button */}
+            {/* Added Get In Touch action button - ensuring optimal mobile click size */}
             <div className="pt-4">
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center space-x-2 px-6 py-3 rounded-lg bg-[#06b6d4] hover:bg-[#22d3ee] text-white font-medium shadow-md shadow-[#06b6d4]/20 transition-all duration-200 transform hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#06b6d4] focus-visible:outline-none"
+                className="inline-flex items-center justify-center space-x-2 px-6 py-3.5 sm:py-3 rounded-lg bg-[#06b6d4] hover:bg-[#22d3ee] text-white font-medium shadow-md shadow-[#06b6d4]/20 transition-all duration-200 transform hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#06b6d4] focus-visible:outline-none min-h-[44px]"
               >
                 <span>Get In Touch</span>
                 <ArrowRight className="w-4 h-4" />

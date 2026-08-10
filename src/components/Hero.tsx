@@ -6,11 +6,11 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen pt-28 pb-20 md:pt-36 md:pb-28 flex flex-col justify-between items-center overflow-hidden bg-gradient-to-b from-[#0f172a] via-[#0f172a] to-[#0f172a]"
+      className="relative min-h-screen pt-28 pb-20 md:pt-36 md:pb-28 flex flex-col justify-between items-center overflow-hidden bg-[#0f172a]"
     >
       {/* Background Dot-Grid with Fade Radial Mask */}
       <div
-        className="absolute inset-0 z-0 pointer-events-none opacity-25"
+        className="absolute inset-0 z-0 pointer-events-none opacity-20"
         style={{
           backgroundImage: "radial-gradient(#334155 1px, transparent 1px)",
           backgroundSize: "24px 24px",
@@ -19,15 +19,19 @@ export default function Hero() {
         }}
       />
 
-      {/* Accent-cyan glow / blur effect behind Hero contents */}
-      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] sm:w-[550px] sm:h-[550px] bg-[#06b6d4]/10 rounded-full blur-[90px] sm:blur-[130px] pointer-events-none z-0" />
-      <div className="absolute bottom-1/4 right-1/4 translate-x-1/4 translate-y-1/4 w-[300px] h-[300px] bg-[#22d3ee]/5 rounded-full blur-[100px] pointer-events-none z-0" />
+      {/* Exquisite, ultra-clean professional glow accents (no gamer-RGB style) */}
+      <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] sm:w-[600px] sm:h-[600px] bg-[#06b6d4]/5 rounded-full blur-[100px] sm:blur-[140px] pointer-events-none z-0" />
+      <div className="absolute bottom-1/4 right-1/4 translate-x-1/4 translate-y-1/4 w-[300px] h-[300px] bg-[#0891b2]/5 rounded-full blur-[100px] pointer-events-none z-0" />
+
+      {/* Elegant glowing vector lines running subtly in the background */}
+      <div className="absolute top-10 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#06b6d4]/20 to-transparent pointer-events-none" />
+      <div className="absolute bottom-20 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#0891b2]/10 to-transparent pointer-events-none" />
 
       {/* Top spacer to assist with centering */}
       <div className="hidden lg:block h-4" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
           {/* Left: Text, Profile, Socials & CTA Content */}
           <div className="lg:col-span-7 space-y-6 md:space-y-8 text-left">
@@ -36,14 +40,14 @@ export default function Hero() {
               style={{ animationDelay: "50ms" }}
               className="animate-fade-in-up flex items-center space-x-4"
             >
-              <div className="relative p-1 rounded-full bg-gradient-to-tr from-[#06b6d4] to-[#22d3ee] shadow-lg shadow-[#06b6d4]/20">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#0f172a] flex items-center justify-center border-2 border-[#0f172a] text-[#06b6d4]">
+              <div className="relative p-1 rounded-full bg-gradient-to-tr from-[#06b6d4]/40 to-[#22d3ee]/40 hover:from-[#06b6d4] hover:to-[#22d3ee] transition-all duration-300 shadow-md">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#1e293b] flex items-center justify-center border border-[#334155] text-[#06b6d4]">
                   {/* Styled developer illustration tag icon */}
-                  <svg className="w-8 h-8 sm:w-10 sm:h-10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 6L2 12L8 18M16 6L22 12L16 18M10.5 20.5L13.5 3.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <svg className="w-8 h-8 sm:w-10 sm:h-10 text-[#06b6d4]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 6L2 12L8 18M16 6L22 12L16 18M10.5 20.5L13.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
-                <span className="absolute bottom-1 right-1 flex h-4 w-4 rounded-full bg-[#06b6d4] border-2 border-[#0f172a] animate-pulse" />
+                <span className="absolute bottom-1.5 right-1.5 flex h-3.5 w-3.5 rounded-full bg-[#06b6d4] border-2 border-[#0f172a] animate-pulse" />
               </div>
               <div>
                 <span className="text-xs sm:text-sm font-bold font-mono text-[#06b6d4] uppercase tracking-wider block">
@@ -58,7 +62,7 @@ export default function Hero() {
             {/* Greeting */}
             <div
               style={{ animationDelay: "150ms" }}
-              className="animate-fade-in-up inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-[#1e293b] border border-[#334155] text-xs sm:text-sm font-semibold font-mono text-[#06b6d4]"
+              className="animate-fade-in-up inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-[#1e293b]/80 border border-[#334155]/60 text-xs sm:text-sm font-semibold font-mono text-[#06b6d4]"
             >
               <span className="flex h-2 w-2 rounded-full bg-[#06b6d4] animate-pulse" />
               <span>Hi, I&apos;m Muhammad Ahmad Khan</span>
@@ -67,10 +71,10 @@ export default function Hero() {
             {/* Confident Headings: tracking-tighter, leading-tight */}
             <h1
               style={{ animationDelay: "200ms" }}
-              className="animate-fade-in-up text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tighter text-[#f8fafc] leading-tight"
+              className="animate-fade-in-up text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#f8fafc] leading-[1.1]"
             >
               Building AI-Powered Products &{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#06b6d4] to-[#22d3ee]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#06b6d4] via-[#22d3ee] to-[#0891b2]">
                 High-Performance Web Applications
               </span>
             </h1>
@@ -78,7 +82,7 @@ export default function Hero() {
             {/* Subheading: max-width comfort constraint */}
             <p
               style={{ animationDelay: "300ms" }}
-              className="animate-fade-in-up text-base sm:text-lg lg:text-xl text-[#f8fafc]/80 leading-relaxed max-w-2xl"
+              className="animate-fade-in-up text-base sm:text-lg lg:text-xl text-[#f8fafc]/75 leading-relaxed max-w-2xl"
             >
               Full-Stack Developer & Computer Science Student — turning ideas into live, production-ready applications with Next.js and AI integration.
             </p>
@@ -121,20 +125,20 @@ export default function Hero() {
               </a>
             </div>
 
-            {/* CTA Buttons: standard focus ring states, rounded-lg, lift on hover */}
+            {/* CTA Buttons: standard focus ring states, rounded-lg, lift on hover, min 44px tap target */}
             <div
               style={{ animationDelay: "400ms" }}
               className="animate-fade-in-up flex flex-wrap gap-4 pt-2"
             >
               <a
                 href="#projects"
-                className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-[#06b6d4] hover:bg-[#22d3ee] text-white font-medium shadow-md shadow-[#06b6d4]/20 transition-all duration-200 transform hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#06b6d4] focus-visible:outline-none"
+                className="inline-flex items-center justify-center px-6 py-3.5 sm:py-3 rounded-lg bg-[#06b6d4] hover:bg-[#22d3ee] text-white font-medium shadow-md shadow-[#06b6d4]/20 transition-all duration-200 transform hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#06b6d4] focus-visible:outline-none min-h-[44px]"
               >
                 View Portfolio
               </a>
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-[#1e293b] hover:bg-[#334155] text-[#f8fafc] font-medium border border-[#334155] transition-all duration-200 transform hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#06b6d4] focus-visible:outline-none"
+                className="inline-flex items-center justify-center px-6 py-3.5 sm:py-3 rounded-lg bg-[#1e293b] hover:bg-[#334155] text-[#f8fafc] font-medium border border-[#334155] transition-all duration-200 transform hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#06b6d4] focus-visible:outline-none min-h-[44px]"
               >
                 Contact Me
               </a>
