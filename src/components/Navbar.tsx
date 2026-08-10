@@ -129,7 +129,7 @@ export default function Navbar() {
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
-              className="inline-flex items-center justify-center p-2.5 rounded-lg text-[#f8fafc]/80 hover:text-[#06b6d4] hover:bg-[#1e293b] focus-visible:ring-2 focus-visible:ring-[#06b6d4] focus-visible:outline-none transition-colors"
+              className="inline-flex items-center justify-center p-3 rounded-lg text-[#f8fafc]/80 hover:text-[#06b6d4] hover:bg-[#1e293b] focus-visible:ring-2 focus-visible:ring-[#06b6d4] focus-visible:outline-none transition-colors min-w-[44px] min-h-[44px]"
               aria-controls="mobile-menu"
               aria-expanded={isOpen}
             >
