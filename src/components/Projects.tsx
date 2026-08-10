@@ -18,13 +18,6 @@ export interface Project {
 }
 
 interface ProjectsProps {
-  hoveredSkill: string | null;
-  selectedSkill: string | null;
-  hoveredProject: string | null;
-  selectedProject: string | null;
-  onHoverProject: (projectName: string | null) => void;
-  onSelectProject: (projectName: string | null) => void;
-  onSelectSkill: (skillName: string | null) => void;
   onOpenCaseStudy?: (projectName: string) => void;
 }
 
@@ -135,43 +128,10 @@ export const featuredProjects: Project[] = [
   },
 ];
 
-export function isProjectMatchingSkill(project: Project, skill: string): boolean {
-  const normSkill = skill.toLowerCase();
-  const tags = project.techTags.map((t) => t.toLowerCase());
-
-  if (tags.includes(normSkill)) return true;
-  if (normSkill === "react" && tags.includes("next.js")) return true;
-  if (normSkill === "python/flask" && (tags.includes("python") || tags.includes("python/flask"))) return true;
-  if (normSkill === "gemini api" && (tags.includes("gemini api") || tags.includes("ai/nlp") || tags.includes("ai vision"))) return true;
-  if (normSkill === "prompt engineering" && project.isAIPowered) return true;
-  if (normSkill === "jules (ai coding agent)" || normSkill === "jules") return true;
-  if (normSkill === "git/github") return true;
-  if (normSkill === "vercel" && tags.includes("vercel")) return true;
-  if (normSkill === "data analysis & visualization" && (project.name === "InsightLoop" || project.name === "DocSim Checker" || project.name === "NOKY")) return true;
-  if (normSkill === "duckdb-wasm" && project.name === "InsightLoop") return true;
-  return false;
-}
-
 export default function Projects({
-  hoveredSkill,
-  selectedSkill,
-  hoveredProject,
-  selectedProject,
-  onHoverProject,
-  onSelectProject,
-  onSelectSkill,
   onOpenCaseStudy,
 }: ProjectsProps) {
   const [activeFilter, setActiveFilter] = useState<"All" | "AI-Powered" | "Full-Stack">("All");
-
-  const handleProjectCardClick = (projectName: string) => {
-    if (selectedProject === projectName) {
-      onSelectProject(null);
-    } else {
-      onSelectProject(projectName);
-      onSelectSkill(null); // Clear selected skill when selecting a project
-    }
-  };
 
   const filteredProjects = featuredProjects.filter((project) => {
     if (activeFilter === "AI-Powered") return project.isAIPowered;
@@ -225,22 +185,6 @@ export default function Projects({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {filteredProjects.map((project) => {
             const IconComponent = project.categoryIcon;
-
-            // Skill highlight checks
-            const activeSkill = hoveredSkill || selectedSkill;
-            const activeProj = hoveredProject || selectedProject;
-
-            const isHighlighted = activeSkill
-              ? isProjectMatchingSkill(project, activeSkill)
-              : activeProj
-                ? activeProj === project.name
-                : false;
-
-            const isMuted = activeSkill
-              ? !isHighlighted
-              : activeProj
-                ? activeProj !== project.name
-                : false;
 
             // Simple CSS-only SVG interactive simulated previews for high performance
             const renderSimulatedPreview = () => {
@@ -429,24 +373,7 @@ export default function Projects({
             return (
               <div
                 key={project.name}
-                onMouseEnter={() => onHoverProject(project.name)}
-                onMouseLeave={() => onHoverProject(null)}
-                onClick={() => handleProjectCardClick(project.name)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    handleProjectCardClick(project.name);
-                  }
-                }}
-                role="button"
-                tabIndex={0}
-                className={`group flex flex-col justify-between bg-[#1e293b] border hover:scale-[1.03] hover:-translate-y-1 shadow-xl shadow-black/15 transition-all duration-300 rounded-xl overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#06b6d4] ${
-                  isHighlighted
-                    ? "border-[#06b6d4] shadow-[#06b6d4]/10 shadow-lg scale-[1.03] -translate-y-1"
-                    : isMuted
-                    ? "border-[#334155]/30 opacity-40 hover:opacity-100"
-                    : "border-[#334155]/60 hover:border-[#06b6d4]/40 hover:shadow-[#06b6d4]/10 hover:shadow-lg"
-                }`}
+                className="group flex flex-col justify-between bg-[#1e293b] border hover:scale-[1.03] hover:-translate-y-1 shadow-xl shadow-black/15 transition-all duration-300 rounded-xl overflow-hidden cursor-default focus-within:ring-2 focus-within:ring-[#06b6d4] border-[#334155]/60 hover:border-[#06b6d4]/40 hover:shadow-[#06b6d4]/10 hover:shadow-lg"
               >
                 {/* Simulated SVG Interactive Preview */}
                 <div className="overflow-hidden bg-[#0f172a] relative">
@@ -488,22 +415,14 @@ export default function Projects({
 
                   {/* Tech Tags */}
                   <div className="flex flex-wrap gap-2 mb-2">
-                    {project.techTags.map((tag) => {
-                      const activeSkill = hoveredSkill || selectedSkill;
-                      const isTagHighlighted = activeSkill ? tag.toLowerCase() === activeSkill.toLowerCase() : false;
-                      return (
-                        <span
-                          key={tag}
-                          className={`text-xs font-medium px-2.5 py-1 rounded-md border font-mono transition-colors duration-200 ${
-                            isTagHighlighted
-                              ? "bg-[#06b6d4]/20 border-[#06b6d4] text-[#06b6d4] font-bold"
-                              : "bg-[#0f172a] border-[#334155]/40 text-[#f8fafc]/60"
-                          }`}
-                        >
-                          {tag}
-                        </span>
-                      );
-                    })}
+                    {project.techTags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs font-medium px-2.5 py-1 rounded-md border font-mono transition-colors duration-200 bg-[#0f172a] border-[#334155]/40 text-[#f8fafc]/60"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
 
@@ -513,7 +432,6 @@ export default function Projects({
                     {project.liveUrl === "#" ? (
                       <button
                         disabled
-                        onClick={(e) => e.stopPropagation()}
                         title="Coming Soon"
                         className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-[#06b6d4]/10 border border-[#06b6d4]/20 text-[#f8fafc]/30 text-xs sm:text-sm font-medium cursor-not-allowed transition-all duration-200"
                       >
@@ -523,10 +441,9 @@ export default function Projects({
                     ) : (
                       <a
                         href={project.liveUrl}
-                        onClick={(e) => e.stopPropagation()}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-[#06b6d4] hover:bg-[#22d3ee] text-white text-xs sm:text-sm font-medium shadow-sm transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#06b6d4] focus-visible:outline-none"
+                        className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-[#06b6d4] hover:bg-[#22d3ee] text-white text-xs sm:text-sm font-medium shadow-sm transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#06b6d4] focus-visible:outline-none min-h-[44px]"
                       >
                         <ExternalLink className="w-4 h-4" />
                         <span>Live Demo</span>
@@ -536,7 +453,6 @@ export default function Projects({
                     {project.sourceUrl === "#" ? (
                       <button
                         disabled
-                        onClick={(e) => e.stopPropagation()}
                         title="Coming Soon"
                         className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-[#1e293b]/40 border border-[#334155]/20 text-[#f8fafc]/25 text-xs sm:text-sm font-medium cursor-not-allowed transition-all duration-200"
                       >
@@ -552,10 +468,9 @@ export default function Projects({
                     ) : (
                       <a
                         href={project.sourceUrl}
-                        onClick={(e) => e.stopPropagation()}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-[#1e293b] hover:bg-[#334155] border border-[#334155] text-[#f8fafc] text-xs sm:text-sm font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#06b6d4] focus-visible:outline-none"
+                        className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-[#1e293b] hover:bg-[#334155] border border-[#334155] text-[#f8fafc] text-xs sm:text-sm font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#06b6d4] focus-visible:outline-none min-h-[44px]"
                       >
                         <svg
                           className="w-4 h-4 fill-current"
@@ -572,11 +487,10 @@ export default function Projects({
                   {/* Case Study Button */}
                   {["InsightLoop", "DocSim Checker", "Clario — Untangle Confusing Information", "NOKY"].includes(project.name) && (
                     <button
-                      onClick={(e) => {
-                        e.stopPropagation();
+                      onClick={() => {
                         onOpenCaseStudy?.(project.name);
                       }}
-                      className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-[#0f172a] hover:bg-[#1e293b] border border-[#334155]/60 hover:border-[#06b6d4]/40 text-[#06b6d4] text-xs sm:text-sm font-semibold transition-all duration-200"
+                      className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-[#0f172a] hover:bg-[#1e293b] border border-[#334155]/60 hover:border-[#06b6d4]/40 text-[#06b6d4] text-xs sm:text-sm font-semibold transition-all duration-200 min-h-[44px]"
                     >
                       <span>View Case Study</span>
                     </button>
